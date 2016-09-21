@@ -1,4 +1,11 @@
-<navbar [title]="title"></navbar>
-
-
-<alert type="info"><i class="fa fa-floppy-o" aria-hidden="true"></i>Hello from ng2-bootstrap</alert>
+<navbar title="Αρχείο Ασθενών"></navbar>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4 sidebar">
+            <patient-list></patient-list>
+        </div>
+        <div class="col-sm-8 main">
+            <patient-details></patient-details>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<filter-patient-list></filter-patient-list>
+
+<div class="list-group">
+    <a class="list-group-item list-group-item-action" 
+    *ngFor="let patient of list.patients | async"
+    [ngClass] = "{active: (selected.id == patient.$key)}" 
+    href="#" (click)="OnClick(patient.$key)">
+        {{ patient.firstName }} {{ patient.lastName}}
+    </a>
+</div>

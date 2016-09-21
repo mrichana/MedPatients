@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import {AuthenticationService} from '../shared/authentication.service';
+
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
@@ -9,14 +11,18 @@ export class NavbarComponent implements OnInit {
 
   @Input() title: string;
 
-  constructor() { }
+  constructor( private auth: AuthenticationService ) {}
 
   ngOnInit() {
     this.title = this.title || 'Default Title'; 
   }
 
   login() {
-    console.log('login click');
+    this.auth.login();
+  }
+
+  logout() {
+    this.auth.logout();
   }
 
 }

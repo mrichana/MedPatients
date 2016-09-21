@@ -1,0 +1,11 @@
+.ng-valid.ng-pristine:not(form):not(ckeditor) {
+  border-left: 5px solid #42A948;
+}
+
+.ng-valid.ng-dirty:not(form):not(ckeditor) {
+  border-left: 5px solid #a9a942
+}
+
+.ng-invalid:not(form):not(ckeditor) {
+  border-left: 5px solid #a94442;
+}
