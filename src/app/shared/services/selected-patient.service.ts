@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
 import { DatabaseService } from './database.service';
-import { Patient } from './patient/patient'
-import { PatientNotes } from './patient/patient-notes'
+import { UUIDService } from './uuid.service';
+import { Patient } from '../patient/patient';
+import { Notes } from '../patient/notes';
 
 @Injectable()
 export class SelectedPatientService {
@@ -11,7 +12,7 @@ export class SelectedPatientService {
   private _selectedPatient: Patient;
   private _selectedPatientNotes: string;
 
-  constructor(private db: DatabaseService) { }
+  constructor(private db: DatabaseService, private uuid: UUIDService) { }
 
   public get patient(): Patient {
     return this._selectedPatient;
@@ -50,6 +51,13 @@ export class SelectedPatientService {
   
   public save() {
     this.db.setPatient(this.id, this._selectedPatient);
-    this.db.setPatientNotes(this.id, new PatientNotes(this._selectedPatient.amka, this._selectedPatientNotes));
+    this.db.setPatientNotes(this.id, new Notes(this._selectedPatientNotes));
+  }
+
+  public create (patient: Patient = null) {
+    let id: string = this.uuid.getUUID();
+    this.db.setPatient(id, patient|| new Patient('0000000000', 'first name', 'last name', new Date()));
+    this.db.setPatientNotes(id, new Notes(''));
+    this.id = id;
   }
 }

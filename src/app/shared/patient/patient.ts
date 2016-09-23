@@ -1,7 +1,4 @@
-import { PatientBase } from './patient-base';
-
-export class Patient extends PatientBase {
+export class Patient {
     constructor(public amka: string, public firstName: string, public lastName: string, public dob: Date) {
-        super(amka);
     }
 }

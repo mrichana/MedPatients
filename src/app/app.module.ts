@@ -5,21 +5,28 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 
+import { routing,
+         appRoutingProviders }  from './app.routing';
+
+
 import { AlertModule } from 'ng2-bootstrap';
 import { CKEditorModule } from 'ng2-ckeditor';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-import { AuthenticationService } from './shared/authentication.service';
-import { UUIDService } from './shared/uuid.service'
-import { DatabaseService } from './shared/database.service';
-import { SelectedPatientService } from './shared/selected-patient.service';
-import { PatientsListService } from './shared/patients-list.service'
+import { AuthenticationService } from './shared/services/authentication.service';
+import { UUIDService } from './shared/services/uuid.service'
+import { DatabaseService } from './shared/services/database.service';
+import { SelectedPatientService } from './shared/services/selected-patient.service';
+import { PatientsListService } from './shared/services/patients-list.service';
+import { CreatePatientService} from './shared/services/create-patient.service';
 
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
 import { FilterPatientListComponent } from './filter-patient-list/filter-patient-list.component';
+import { PatientDetailsViewComponent } from './patient-details-view/patient-details-view.component';
+import { ListViewComponent } from './list-view/list-view.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -37,7 +44,9 @@ export const firebaseConfig = {
     NavbarComponent,
     PatientListComponent,
     PatientDetailsComponent,
-    FilterPatientListComponent
+    FilterPatientListComponent,
+    PatientDetailsViewComponent,
+    ListViewComponent
   ],
   imports: [
     BrowserModule,
@@ -46,14 +55,17 @@ export const firebaseConfig = {
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AlertModule,
-    CKEditorModule
+    CKEditorModule,
+    routing
   ],
   providers: [
     AuthenticationService,
     DatabaseService,
     SelectedPatientService,
     PatientsListService,
-    UUIDService
+    CreatePatientService,
+    UUIDService,
+    appRoutingProviders
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 import {NgForm} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
-import {SelectedPatientService} from '../shared/selected-patient.service';
+import {SelectedPatientService} from '../shared/services/selected-patient.service';
 
 @Component({
   selector: 'patient-details',
@@ -15,7 +15,6 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     form.form.markAsPristine();
     this.selected.save();
   }
