@@ -23,7 +23,7 @@ import { PatientsListService } from './shared/services/patients-list.service';
 import { CreatePatientService} from './shared/services/create-patient.service';
 
 import { PatientListComponent } from './patient-list/patient-list.component';
-import { PatientDetailsComponent } from './patient-details/patient-details.component';
+import { PatientDetailsEditComponent } from './patient-details-edit/patient-details-edit.component';
 import { FilterPatientListComponent } from './filter-patient-list/filter-patient-list.component';
 import { PatientDetailsViewComponent } from './patient-details-view/patient-details-view.component';
 import { ListViewComponent } from './list-view/list-view.component';
@@ -43,7 +43,7 @@ export const firebaseConfig = {
     AppComponent,
     NavbarComponent,
     PatientListComponent,
-    PatientDetailsComponent,
+    PatientDetailsEditComponent,
     FilterPatientListComponent,
     PatientDetailsViewComponent,
     ListViewComponent

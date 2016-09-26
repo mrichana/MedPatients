@@ -30,7 +30,7 @@ export class SelectedPatientService {
   }
 
   public get age(): number {
-    let now :moment.Moment = moment();
+    let now: moment.Moment = moment();
     let ret = now.diff(moment(this._selectedPatient.dob), 'years');
     return ret;
   }
@@ -48,16 +48,15 @@ export class SelectedPatientService {
       this._selectedPatientNotes = notes.notes;
     });
   }
-  
+
   public save() {
     this.db.setPatient(this.id, this._selectedPatient);
     this.db.setPatientNotes(this.id, new Notes(this._selectedPatientNotes));
   }
 
-  public create (patient: Patient = null) {
-    let id: string = this.uuid.getUUID();
-    this.db.setPatient(id, patient|| new Patient('0000000000', 'first name', 'last name', new Date()));
-    this.db.setPatientNotes(id, new Notes(''));
-    this.id = id;
+  public create(patient: Patient = null) {
+    this._id = this.uuid.getUUID();
+    this._selectedPatient = patient || new Patient('0000000000', 'first name', 'last name', new Date());
+    this._selectedPatientNotes = '';
   }
 }

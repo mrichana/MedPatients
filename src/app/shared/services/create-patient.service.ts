@@ -10,6 +10,9 @@ export class CreatePatientService {
   constructor(private db: DatabaseService, private selected: SelectedPatientService, private uuid: UUIDService) { }
 
   private patientFromString(str: string): Patient {
+    if (!str) {
+      return new Patient('', '', '', new Date());
+    }
     let nameArray: RegExpExecArray = /^(?:(?:([0-9]{11})|(\D+?)\s+(\D+?)|(\D+)))$/.exec(str.trim());
     if (nameArray) {
       return new Patient(nameArray[1] || '', nameArray[2] || '', nameArray[3] || nameArray[4] || '', new Date());

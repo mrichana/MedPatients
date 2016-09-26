@@ -17,7 +17,6 @@ export class PatientListComponent implements OnInit {
   ngOnInit() {
     this.list.patients.subscribe(patients => {
       this.patients = patients;
-      console.log(this.patients);
     })
   }
 

@@ -6,24 +6,24 @@ import { Notes } from '../patient/notes';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class DatabaseService {
-  private _subscription: Subscription;
-  private _patients: Observable<Patient[]>;
+  private _listSubscription: Subscription;
+  private _patients: BehaviorSubject<Patient[]>;
 
   constructor(private _af: AngularFire, private _auth: AuthenticationService) {
-    this._patients = Observable.create(observer => {
-      this._af.auth.subscribe(auth => {
-        if (auth) {
-          this._subscription = this._af.database.list(auth.uid + '/patients').subscribe(patients => {
-            observer.next(patients);
-          })
-        } else {
-          this._subscription.unsubscribe();
-          observer.next(<Patient[]>[]);
-        }
-      });
+    this._patients = new BehaviorSubject(<Patient[]>[]);
+    this._af.auth.subscribe(auth => {
+      if (auth) {
+        this._listSubscription = this._af.database.list(auth.uid + '/patients').subscribe(patients => {
+          this._patients.next(patients);
+        })
+      } else {
+        if (this._listSubscription) { this._listSubscription.unsubscribe(); }
+        this._patients.next(<Patient[]>[]);
+      }
     });
   }
 
@@ -35,10 +35,10 @@ export class DatabaseService {
   }
 
   public get patients(): Observable<Patient[]> {
-    return this._patients;
+    return this._patients.asObservable();
   }
 
-    public getPatient(amka: String): Observable<Patient> {
+  public getPatient(amka: String): Observable<Patient> {
     if (this._auth.authenticated) {
       return this._af.database.object(this._auth.uid + '/patients/' + amka);
     }
@@ -77,6 +77,4 @@ export class DatabaseService {
       throw 'Error';
     }
   }
-
-
 }

@@ -5,35 +5,35 @@
         </a>
 
         <span class="navbar-brand">{{ selected.patient.firstName }} {{ selected.patient.lastName}} ({{selected.age}})</span>
-        <button type="button" class="btn btn-outline-primary pull-xs-right" [disabled]="!patientForm.form.valid" (click)="onSubmit(patientForm)">
+        <button type="button" class="btn btn-outline-primary pull-xs-right" [hidden]="!form.valid||!form.dirty" (click)="onSubmit()">
             <i class="fa fa-floppy-o" aria-hidden="true"></i>
         </button>
     </nav>
-    <form #patientForm="ngForm">
+    <form [formGroup]="form">
         <div class="row">
             <div class="form-group col-sm-5">
                 <label for="firstName">Όνομα</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="selected.patient.firstName">
+                <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName">
             </div>
             <div class="form-group col-sm-7">
                 <label for="lastName">Επώνυμο</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" required [(ngModel)]="selected.patient.lastName">
+                <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-sm-7">
                 <label for="amka">ΑΜΚΑ</label>
-                <input type="number" class="form-control" id="amka" name="amka" [(ngModel)]="selected.patient.amka">
+                <input type="tel" class="form-control" id="amka" name="amka" formControlName="amka">
             </div>
             <div class="form-group col-sm-5">
                 <label for="dob">Ημ.Γέννησης</label>
-                <input type="date" class="form-control" id="dob" name="dob" [(ngModel)]="selected.patient.dob">
+                <input type="date" class="form-control" id="dob" name="dob" formControlName="dob">
             </div>
         </div>
         <div class="form-group">
             <label for="notes">Σημειώσεις</label>
             <ckeditor [config]="{entities_greek: false,toolbarCanCollapse: true, toolbarStartupExpanded: false, scayt_autoStartup: true}"
-                [(ngModel)]="selected.notes" id="notes" name="notes"></ckeditor>
+                id="notes" name="notes" formControlName="notes"></ckeditor> 
         </div>
     </form>
 </div>
