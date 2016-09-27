@@ -4,13 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
+import { CKEditorModule } from 'ng2-ckeditor';
+
+import { MdSidenavModule } from '@angular2-material/sidenav';
+import { MdToolbarModule } from '@angular2-material/toolbar';
+import { MdButtonModule } from '@angular2-material/button';
+import { MdInputModule } from '@angular2-material/input';
+import { MdListModule } from '@angular2-material/list';
+import { MdCardModule } from '@angular2-material/card';
 
 import { routing,
          appRoutingProviders }  from './app.routing';
-
-
-import { AlertModule } from 'ng2-bootstrap';
-import { CKEditorModule } from 'ng2-ckeditor';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -27,6 +31,7 @@ import { PatientDetailsEditComponent } from './patient-details-edit/patient-deta
 import { FilterPatientListComponent } from './filter-patient-list/filter-patient-list.component';
 import { PatientDetailsViewComponent } from './patient-details-view/patient-details-view.component';
 import { ListViewComponent } from './list-view/list-view.component';
+import { InputIconComponent } from './patient-details-edit/input-icon/input-icon.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -46,7 +51,7 @@ export const firebaseConfig = {
     PatientDetailsEditComponent,
     FilterPatientListComponent,
     PatientDetailsViewComponent,
-    ListViewComponent
+    ListViewComponent, InputIconComponent
   ],
   imports: [
     BrowserModule,
@@ -54,8 +59,13 @@ export const firebaseConfig = {
     ReactiveFormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AlertModule,
     CKEditorModule,
+    MdSidenavModule,
+    MdToolbarModule,
+    MdButtonModule,
+    MdInputModule,
+    MdListModule,
+    MdCardModule,
     routing
   ],
   providers: [

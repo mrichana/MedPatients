@@ -1,7 +1,4 @@
-<div class="form-group">
-  <label for="search" class="form-label">Όνομα/ΑΜΚΑ/Τηλέφωνο</label>
-  <div class="input-group">
-    <input type="search" class="form-control" id="search" name="search" [formControl]="searchTerm">
-    <span class="input-group-btn"><button class="btn btn-primary" type="button" (click)="newPatient()"><i class="fa fa-plus" aria-hidden="true"></i></button></span>
-  </div>
-</div>
+<span>
+  <md-input type="search" placeholder="Όνομα/ΑΜΚΑ/Τηλέφωνο" [formControl]="searchTerm" class="fill-remaining-space"></md-input>
+  <button md-icon-button type="button" (click)="newPatient()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+</span>

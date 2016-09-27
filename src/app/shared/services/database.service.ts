@@ -47,7 +47,7 @@ export class DatabaseService {
     }
   }
 
-  public setPatient(id: string, patient: Patient) {
+  public setPatient(id: string, patient: Patient=null) {
     if (this._auth.authenticated) {
       this.cleanUp(patient);
       let firebaseObject: FirebaseObjectObservable<Patient> = this._af.database.object(this._auth.uid + '/patients/' + id);
@@ -67,7 +67,7 @@ export class DatabaseService {
     }
   }
 
-  public setPatientNotes(id: string, notes: Notes) {
+  public setPatientNotes(id: string, notes: Notes=null) {
     if (this._auth.authenticated) {
       this.cleanUp(notes);
       let firebaseObject: FirebaseObjectObservable<Patient> = this._af.database.object(this._auth.uid + '/patient-notes/' + id);

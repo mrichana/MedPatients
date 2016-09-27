@@ -1,18 +1,17 @@
-<nav class="navbar navbar-light bg-faded">
-  <div id="navbar-header">
-    <a class="navbar-brand" href="#">{{title}}</a>
-    <ul class="nav navbar-nav">
-    </ul>
-    <form class="form-inline pull-xs-right">
+<md-toolbar>
+  <button md-icon-button type="button" (click)="openSideBar()"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button>
+  {{title}}
+  <span class="fill-remaining-space"></span>
+    
+    <form>
       <span *ngIf="!auth.authenticated">
-        <a class="navbar-link" href="#" (click)="login()">Σύνδεση...</a>
+        <a md-button (click)="login()">Σύνδεση...</a>
       </span>
       <span *ngIf="auth.authenticated" >
-        <a class="navbar-link" href="#" (click)="logout()">
+        <a md-button href="#" (click)="logout()">
           {{auth?.displayName}}
           <img src="{{auth?.photoURL}}" class="img-circle photo">
         </a>
       </span>
     </form>
-  </div>
-</nav> <!-- /navbar -->
+</md-toolbar>

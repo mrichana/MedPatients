@@ -11,6 +11,7 @@ export class SelectedPatientService {
   private _id: string;
   private _selectedPatient: Patient;
   private _selectedPatientNotes: string;
+  private _new: boolean;
 
   constructor(private db: DatabaseService, private uuid: UUIDService) { }
 
@@ -47,16 +48,33 @@ export class SelectedPatientService {
     this.db.getPatientNotes(value).subscribe(notes => {
       this._selectedPatientNotes = notes.notes;
     });
+    this._new=false;
+  }
+
+  public get isNew(): boolean {
+    return this._new;
   }
 
   public save() {
     this.db.setPatient(this.id, this._selectedPatient);
     this.db.setPatientNotes(this.id, new Notes(this._selectedPatientNotes));
+    this._new=false;
   }
 
   public create(patient: Patient = null) {
     this._id = this.uuid.getUUID();
     this._selectedPatient = patient || new Patient('0000000000', 'first name', 'last name', new Date());
     this._selectedPatientNotes = '';
+    this._new=true;
+  }
+
+  public delete() {
+    this.db.setPatient(this.id);
+    this.db.setPatientNotes(this.id);
+    
+    this._id=null;
+    this._new=null;
+    this._selectedPatient=null;
+    this._selectedPatientNotes=null;
   }
 }

@@ -1,6 +1,9 @@
-<div class="col-sm-4 sidebar">
-  <patient-list></patient-list>
-</div>
-<div class="col-sm-8 main">
+<md-sidenav-layout class="full-height">
+  <navbar title="Αρχείο Ασθενών" (openSidebar)="start.open()"></navbar>
+
+  <md-sidenav #start>
+    <filter-patient-list></filter-patient-list>
+    <patient-list (PatientSelected)="start.close()"></patient-list>
+  </md-sidenav>
   <patient-details-view></patient-details-view>
-</div>
+</md-sidenav-layout>

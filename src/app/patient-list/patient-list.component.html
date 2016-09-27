@@ -1,10 +1,8 @@
-<filter-patient-list></filter-patient-list>
-
-<div class="list-group">
-    <button type="button" class="list-group-item list-group-item-action" 
+<md-nav-list>
+    <a md-list-item  
     *ngFor="let patient of patients"
     [ngClass] = "{active: (selected.id == patient.$key)}" 
     (click)="OnClick(patient.$key)">
         {{ patient.firstName }} {{ patient.lastName}}
-    </button>
-</div>
+    </a>
+</md-nav-list>

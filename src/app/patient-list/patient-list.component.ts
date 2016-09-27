@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PatientsListService } from '../shared/services/patients-list.service'
 import { SelectedPatientService } from '../shared/services/selected-patient.service';
 
@@ -11,6 +11,7 @@ import { Patient } from '../shared/patient/patient';
 })
 export class PatientListComponent implements OnInit {
   private patients: Patient[];
+  @Output() PatientSelected: EventEmitter<Patient> = new EventEmitter<Patient>();
 
   constructor(private list: PatientsListService, private selected: SelectedPatientService) { }
 
@@ -21,6 +22,7 @@ export class PatientListComponent implements OnInit {
   }
 
   OnClick(id: string) {
+    this.PatientSelected.emit(this.selected.patient);
     this.selected.id = id;
   }
 

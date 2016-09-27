@@ -1,5 +1,6 @@
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 import { SelectedPatientService } from '../shared/services/selected-patient.service';
@@ -12,7 +13,7 @@ import { SelectedPatientService } from '../shared/services/selected-patient.serv
 export class PatientDetailsEditComponent implements OnInit {
   private form: FormGroup;
 
-  constructor(private fb: FormBuilder, private selected: SelectedPatientService) {
+  constructor(private fb: FormBuilder, private selected: SelectedPatientService, private router: Router) {
     this.form = fb.group({
       'firstName': [this.selected.patient.firstName],
       'lastName': [this.selected.patient.lastName, Validators.required],
@@ -46,8 +47,13 @@ export class PatientDetailsEditComponent implements OnInit {
     })
   }
 
-  onSubmit() {
+  submit() {
     this.selected.save();
     this.form.markAsPristine();
+  }
+
+  delete() {
+    this.selected.delete();
+    this.router.navigate(['/']);
   }
 }

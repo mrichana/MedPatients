@@ -1,0 +1,11 @@
+.clean {
+  color: #42A948;
+}
+
+.dirty {
+  color: #a9a942;
+}
+
+.invalid {
+  color: #a94442;
+}

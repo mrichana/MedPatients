@@ -1,10 +1,13 @@
-<div class="container-fluid" *ngIf="selected.patient">
-  <nav class="navbar navbar-light row">
-    <span class="navbar-brand">{{ selected.patient.firstName }} {{ selected.patient.lastName}} ({{selected.age}}) <span class="tag tag-default">{{selected.patient.amka}}</span></span>
-    <a class="btn btn-outline-primary pull-xs-right" routerLink="/edit">
-      <i class="fa fa-pencil" aria-hidden="true"></i>
-    </a>
-  </nav>
-  <div [innerHTML]="selected.notes">
-  </div>
+<div *ngIf="selected.patient">
+  <md-card>
+    <md-toolbar>
+      <span>{{ selected.patient.firstName }} {{ selected.patient.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span>
+      </span>
+      <span class="fill-remaining-space"></span>
+      <a md-raised-button routerLink="/edit"><i class="fa fa-pencil" aria-hidden="true">Επεξεργασία...</i></a>
+    </md-toolbar>
+    <md-card-content *ngIf="selected.patient.amka">Α.Μ.Κ.Α. {{selected.patient.amka}}</md-card-content>
+  </md-card>
+  <md-card [innerHTML]="selected.notes">
+  </md-card>
 </div>
