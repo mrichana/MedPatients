@@ -1,8 +1,8 @@
 <md-toolbar>
-    <button md-icon-button type="button" (click)="router.navigate(['/'])"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i></button> {{ selected.patient.firstName
-    }} {{ selected.patient.lastName}} ({{selected.age}})
+    <button md-icon-button type="button" (click)="router.navigate(['/'])"><i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></button> {{ selected.patient.firstName
+    }} {{ selected.patient.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span>
     <span class="fill-remaining-space"></span>
-    <button md-button type="button" (click)="delete()"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></button>
+    <button md-button type="button" (click)="delete()" class="delete-icon"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></button>
     <button md-raised-button color="primary" type="button" [disabled]="!(form.valid&&(form.dirty || selected.isNew))" (click)="submit()">
         <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
     </button>

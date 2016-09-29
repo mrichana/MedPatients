@@ -1,10 +1,9 @@
 <div *ngIf="selected.patient">
   <md-card>
     <md-toolbar>
-      <span>{{ selected.patient.firstName }} {{ selected.patient.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span>
-      </span>
+      <span>{{ selected.patient.firstName }} {{ selected.patient.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span></span>
       <span class="fill-remaining-space"></span>
-      <a md-raised-button routerLink="/edit"><i class="fa fa-pencil" aria-hidden="true">Επεξεργασία...</i></a>
+      <a md-raised-button routerLink="/edit"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
     </md-toolbar>
     <md-card-content *ngIf="selected.patient.amka">Α.Μ.Κ.Α. {{selected.patient.amka}}</md-card-content>
   </md-card>
