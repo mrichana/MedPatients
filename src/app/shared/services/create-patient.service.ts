@@ -11,13 +11,13 @@ export class CreatePatientService {
 
   private patientFromString(str: string): Patient {
     if (!str) {
-      return new Patient('', '', '', new Date());
+      return new Patient(null, null, null, null);
     }
     let nameArray: RegExpExecArray = /^(?:(?:([0-9]{11})|(\D+?)\s+(\D+?)|(\D+)))$/.exec(str.trim());
     if (nameArray) {
-      return new Patient(nameArray[1] || '', nameArray[2] || '', nameArray[3] || nameArray[4] || '', new Date());
+      return new Patient(nameArray[1] || null, nameArray[2] || null, nameArray[3] || nameArray[4] || null, null);
     } else {
-      return new Patient('', '', '', new Date());
+      return new Patient(null, null, null, null);
     }
   }
 

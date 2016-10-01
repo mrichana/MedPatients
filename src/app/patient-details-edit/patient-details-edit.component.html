@@ -1,19 +1,30 @@
 <md-toolbar>
-    <button md-icon-button type="button" (click)="router.navigate(['/'])"><i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></button> {{ selected.patient.firstName
-    }} {{ selected.patient.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span>
+    <button md-icon-button type="button" (click)="selected.reniew();router.navigate(['/'])"><i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></button>    {{ selected.firstName }} {{ selected.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span>
     <span class="fill-remaining-space"></span>
     <button md-button type="button" (click)="delete()" class="delete-icon"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></button>
-    <button md-raised-button color="primary" type="button" [disabled]="!(form.valid&&(form.dirty || selected.isNew))" (click)="submit()">
+    <button md-raised-button color="primary" type="button" [disabled]="!(form.valid&&(form.dirty || selected.isNew))" (click)="submit(form)">
         <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
     </button>
 </md-toolbar>
 <md-card>
-    <form [formGroup]="form">
-        <md-input type="text" placeholder="Όνομα" formControlName="firstName"><input-icon md-suffix [invalid]="form.get('firstName').invalid" [pristine]="form.get('firstName').pristine"></input-icon></md-input>
-        <md-input type="text" placeholder="Επώνυμο" formControlName="lastName" required><input-icon md-suffix [invalid]="form.get('lastName').invalid" [pristine]="form.get('lastName').pristine"></input-icon></md-input>
-        <md-input type="tel" placeholder="ΑΜΚΑ" formControlName="amka"><input-icon md-suffix [invalid]="form.get('amka').invalid" [pristine]="form.get('amka').pristine"></input-icon></md-input>
-        <md-input type="date" placeholder="Ημ.Γέννησης" formControlName="dob"><input-icon md-suffix [invalid]="form.get('dob').invalid" [pristine]="form.get('dob').pristine"></input-icon></md-input>
+    <form #form="ngForm">
+        <md-input type="text" placeholder="Όνομα" [(ngModel)]="selected.firstName" name="firstName" #firstName="ngModel">
+            <md-input-icon md-suffix [model]="firstName"></md-input-icon>
+        </md-input>
+
+        <md-input type="text" placeholder="Επώνυμο" [(ngModel)]="selected.lastName" name="lastName" #lastName="ngModel" required>
+            <md-input-icon md-suffix [model]="lastName"></md-input-icon>
+        </md-input>
+
+        <md-input type="tel" placeholder="ΑΜΚΑ" [(ngModel)]="selected.amka" name="amka" #amka="ngModel">
+            <md-input-icon md-suffix [model]="amka"></md-input-icon>
+        </md-input>
+
+        <md-input type="date" placeholder="Ημ.Γέννησης" [(ngModel)]="selected.dob" name="dob" #dob="ngModel">
+            <md-input-icon md-suffix [model]="dob"></md-input-icon>
+        </md-input>
+
         <ckeditor [config]="{entities_greek: false,toolbarCanCollapse: true, toolbarStartupExpanded: false, scayt_autoStartup: true}"
-            formControlName="notes"></ckeditor>
+            [(ngModel)]="selected.notes" name="notes"></ckeditor>
     </form>
 </md-card>

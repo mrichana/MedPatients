@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { InputIconComponent } from './input-icon.component';
+import { MdInputIconComponent } from './md-input-icon.component';
 
-describe('Component: InputIcon', () => {
+describe('Component: MdInputIcon', () => {
   it('should create an instance', () => {
-    let component = new InputIconComponent();
+    let component = new MdInputIconComponent();
     expect(component).toBeTruthy();
   });
 });

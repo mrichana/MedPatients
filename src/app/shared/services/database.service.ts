@@ -38,9 +38,9 @@ export class DatabaseService {
     return this._patients.asObservable();
   }
 
-  public getPatient(amka: String): Observable<Patient> {
+  public getPatient(id: String): Observable<Patient> {
     if (this._auth.authenticated) {
-      return this._af.database.object(this._auth.uid + '/patients/' + amka);
+      return this._af.database.object(this._auth.uid + '/patients/' + id);
     }
     else {
       return null;

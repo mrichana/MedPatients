@@ -22,8 +22,8 @@ export class PatientListComponent implements OnInit {
   }
 
   OnClick(id: string) {
+    this.selected.select(id);
     this.PatientSelected.emit(this.selected.patient);
-    this.selected.id = id;
   }
 
 }

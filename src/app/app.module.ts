@@ -31,7 +31,7 @@ import { PatientDetailsEditComponent } from './patient-details-edit/patient-deta
 import { FilterPatientListComponent } from './filter-patient-list/filter-patient-list.component';
 import { PatientDetailsViewComponent } from './patient-details-view/patient-details-view.component';
 import { ListViewComponent } from './list-view/list-view.component';
-import { InputIconComponent } from './patient-details-edit/input-icon/input-icon.component';
+import { MdInputIconComponent } from './md-input-icon/md-input-icon.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -51,7 +51,7 @@ export const firebaseConfig = {
     PatientDetailsEditComponent,
     FilterPatientListComponent,
     PatientDetailsViewComponent,
-    ListViewComponent, InputIconComponent
+    ListViewComponent, MdInputIconComponent
   ],
   imports: [
     BrowserModule,

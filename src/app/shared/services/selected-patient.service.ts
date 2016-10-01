@@ -9,72 +9,142 @@ import { Notes } from '../patient/notes';
 @Injectable()
 export class SelectedPatientService {
   private _id: string;
-  private _selectedPatient: Patient;
-  private _selectedPatientNotes: string;
-  private _new: boolean;
+  private _patient: Patient;
+  private _patientNotes: string;
 
   constructor(private db: DatabaseService, private uuid: UUIDService) { }
 
-  public get patient(): Patient {
-    return this._selectedPatient;
+  private dobFromAmka(amka: string): string {
+    let dates: RegExpExecArray = /^(\d{2})(\d{2})(\d{2})\d{5}$/.exec(amka);
+    if (dates) {
+      let year: number = +dates[3];
+      if ((new Date().getFullYear()) - (year + 1900) > 100) {
+        year = year + 2000;
+      } else {
+        year = year + 1900;
+      }
+      return year.toString() + '-' + dates[2] + '-' + dates[1];
+    }
+    return null;
   }
 
+
+  public get patient(): Patient {
+    return this._patient;
+  }
   public set patient(value: Patient) {
-    this._selectedPatient = value;
+    this._patient = value;
+  }
+
+  public get firstName(): string {
+    return this._patient.firstName;
+  }
+  public set firstName(value: string) {
+    this._patient.firstName = value;
+  }
+
+  public get lastName(): string {
+    return this._patient.lastName;
+  }
+  public set lastName(value: string) {
+    this._patient.lastName = value;
+  }
+
+  public get amka(): string {
+    return this._patient.amka;
+  }
+  public set amka(value: string) {
+    this._patient.amka = value;
+    if (!this.dob) {
+      this.dob = this.dobFromAmka(this.amka);
+    }
+  }
+
+  public get dob(): string {
+    return this._patient.dob;
+  }
+  public set dob(value: string) {
+    this._patient.dob = value;
   }
 
   public get notes(): string {
-    return this._selectedPatientNotes;
+    return this._patientNotes;
   }
   public set notes(value: string) {
-    this._selectedPatientNotes = value;
+    this._patientNotes = value;
   }
 
   public get age(): number {
     let now: moment.Moment = moment();
-    let ret = now.diff(moment(this._selectedPatient.dob), 'years');
+    let ret = now.diff(moment(this._patient.dob), 'years');
     return ret;
   }
 
   public get id(): string {
     return this._id;
   }
-  public set id(value: string) {
-    this._id = value;
 
-    this.db.getPatient(value).subscribe(patient => {
-      this._selectedPatient = patient;
+  public select(id: string) {
+    this._id = id;
+    this.db.getPatient(id).subscribe(patient => {
+      this._patient = patient;
     });
-    this.db.getPatientNotes(value).subscribe(notes => {
-      this._selectedPatientNotes = notes.notes;
+    this.db.getPatientNotes(id).subscribe(notes => {
+      this._patientNotes = notes.notes;
     });
-    this._new=false;
   }
 
+  private newId() {
+    this._id = this.uuid.getUUID();
+  }
+  // public set id(value: string) {
+  //   this._id = value;
+
+  //   this.db.getPatient(value).subscribe(patient => {
+  //     this._patient = patient;
+  //   });
+  //   this.db.getPatientNotes(value).subscribe(notes => {
+  //     this._patientNotes = notes.notes;
+  //   });
+  //   this._new=false;
+  // }
+
   public get isNew(): boolean {
-    return this._new;
+    return this.id == null;
   }
 
   public save() {
-    this.db.setPatient(this.id, this._selectedPatient);
-    this.db.setPatientNotes(this.id, new Notes(this._selectedPatientNotes));
-    this._new=false;
+    if (this.isNew) {
+      this.newId();
+    }
+    this.db.setPatient(this.id, this._patient);
+    this.db.setPatientNotes(this.id, new Notes(this._patientNotes));
   }
 
   public create(patient: Patient = null) {
-    this._id = this.uuid.getUUID();
-    this._selectedPatient = patient || new Patient('0000000000', 'first name', 'last name', new Date());
-    this._selectedPatientNotes = '';
-    this._new=true;
+    this._id = null;
+    this._patient = patient || new Patient(null, null, null, null);
+    if (!this.dob) {
+      this.dob = this.dobFromAmka(this.amka);
+    }
+    this._patientNotes = null;
   }
 
   public delete() {
     this.db.setPatient(this.id);
     this.db.setPatientNotes(this.id);
-    
-    this._id=null;
-    this._new=null;
-    this._selectedPatient=null;
-    this._selectedPatientNotes=null;
+
+    this._id = null;
+    this._patient = null;
+    this._patientNotes = null;
+  }
+
+  public reniew() {
+    if (this.isNew) {
+      this._patient = null;
+      this._patientNotes = null;
+    } else {
+      this.select(this.id);
+    }
   }
 }
