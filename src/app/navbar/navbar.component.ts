@@ -10,6 +10,7 @@ import {AuthenticationService} from '../shared/services/authentication.service';
 export class NavbarComponent implements OnInit {
 
   @Input() title: string;
+  @Input() showSidebarButton: boolean;
 
   @Output() openSidebar: EventEmitter<any> = new EventEmitter();
 

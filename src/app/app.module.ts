@@ -25,6 +25,7 @@ import { DatabaseService } from './shared/services/database.service';
 import { SelectedPatientService } from './shared/services/selected-patient.service';
 import { PatientsListService } from './shared/services/patients-list.service';
 import { CreatePatientService} from './shared/services/create-patient.service';
+import { TdMediaService } from './shared/services/media.service'
 
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { PatientDetailsEditComponent } from './patient-details-edit/patient-details-edit.component';
@@ -75,6 +76,7 @@ export const firebaseConfig = {
     PatientsListService,
     CreatePatientService,
     UUIDService,
+    TdMediaService,
     appRoutingProviders
   ],
   bootstrap: [AppComponent]
