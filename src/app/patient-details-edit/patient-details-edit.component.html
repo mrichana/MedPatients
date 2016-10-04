@@ -24,7 +24,17 @@
             <md-input-icon md-suffix [model]="dob"></md-input-icon>
         </md-input>
 
-        <ckeditor [config]="{entities_greek: false,toolbarCanCollapse: true, toolbarStartupExpanded: false, scayt_autoStartup: true}"
+        <md-input type="tel" placeholder="Τηλέφωνο" [(ngModel)]="selected.telephone" name="telephone" #telephone="ngModel">
+            <i md-prefix class="fa fa-phone"></i>
+            <md-input-icon md-suffix [model]="telephone"></md-input-icon>
+        </md-input>
+
+        <md-input type="tel" placeholder="Κινητό" [(ngModel)]="selected.mobile" name="mobile" #mobile="ngModel">
+            <i md-prefix class="fa fa-mobile-phone"></i>
+            <md-input-icon md-suffix [model]="mobile"></md-input-icon>
+        </md-input>
+
+        <ckeditor [config]="{entities_greek: false,toolbarCanCollapse: true, toolbarStartupExpanded: false, scayt_autoStartup: true, autoGrow_onStartup: true}"
             [(ngModel)]="selected.notes" name="notes"></ckeditor>
     </form>
 </md-card>

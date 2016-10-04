@@ -14,6 +14,19 @@ export class SelectedPatientService {
 
   constructor(private db: DatabaseService, private uuid: UUIDService) { }
 
+  private patientFromString(str: string): Patient {
+    if (!str) {
+      return new Patient(null, null, null, null, null, null);
+    }
+    let nameArray: RegExpExecArray = /^(?:(?:([0-9]{11})|(\D+?)\s+(\D+?)|(\D+)))$/.exec(str.trim());
+    if (nameArray) {
+      return new Patient(nameArray[1] || null, nameArray[2] || null, nameArray[3] || nameArray[4] || null, null, null, null);
+    } else {
+      return new Patient(null, null, null, null, null, null);
+    }
+  }
+
+
   private dobFromAmka(amka: string): string {
     let dates: RegExpExecArray = /^(\d{2})(\d{2})(\d{2})\d{5}$/.exec(amka);
     if (dates) {
@@ -67,6 +80,20 @@ export class SelectedPatientService {
     this._patient.dob = value;
   }
 
+  public get telephone(): string {
+    return this._patient.telephone;
+  }
+  public set telephone(value: string) {
+    this._patient.telephone = value;
+  }
+
+  public get mobile(): string {
+    return this._patient.mobile;
+  }
+  public set mobile(value: string) {
+    this._patient.mobile = value;
+  }
+
   public get notes(): string {
     return this._patientNotes;
   }
@@ -97,17 +124,6 @@ export class SelectedPatientService {
   private newId() {
     this._id = this.uuid.getUUID();
   }
-  // public set id(value: string) {
-  //   this._id = value;
-
-  //   this.db.getPatient(value).subscribe(patient => {
-  //     this._patient = patient;
-  //   });
-  //   this.db.getPatientNotes(value).subscribe(notes => {
-  //     this._patientNotes = notes.notes;
-  //   });
-  //   this._new=false;
-  // }
 
   public get isNew(): boolean {
     return this.id == null;
@@ -121,9 +137,13 @@ export class SelectedPatientService {
     this.db.setPatientNotes(this.id, new Notes(this._patientNotes));
   }
 
-  public create(patient: Patient = null) {
+  public create(patient: Patient | string = null) {
     this._id = null;
-    this._patient = patient || new Patient(null, null, null, null);
+    if (typeof(patient) === 'string') {
+      patient = this.patientFromString(patient);
+    }
+    
+    this._patient = patient || new Patient(null, null, null, null, null, null);
     if (!this.dob) {
       this.dob = this.dobFromAmka(this.amka);
     }

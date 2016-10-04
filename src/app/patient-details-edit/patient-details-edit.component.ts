@@ -15,13 +15,6 @@ export class PatientDetailsEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.form.valueChanges.subscribe(value => {
-    //   this.selected.firstName = value['firstName'];
-    //   this.selected.lastName = value['lastName'];
-    //   this.selected.amka = value['amka'];
-    //   this.selected.dob = value['dob'];
-    //   this.selected.notes = value['notes'];
-    // })
   }
 
   submit(form: NgForm) {

@@ -24,7 +24,6 @@ import { UUIDService } from './shared/services/uuid.service'
 import { DatabaseService } from './shared/services/database.service';
 import { SelectedPatientService } from './shared/services/selected-patient.service';
 import { PatientsListService } from './shared/services/patients-list.service';
-import { CreatePatientService} from './shared/services/create-patient.service';
 import { TdMediaService } from './shared/services/media.service'
 
 import { PatientListComponent } from './patient-list/patient-list.component';
@@ -74,7 +73,6 @@ export const firebaseConfig = {
     DatabaseService,
     SelectedPatientService,
     PatientsListService,
-    CreatePatientService,
     UUIDService,
     TdMediaService,
     appRoutingProviders

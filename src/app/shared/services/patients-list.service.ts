@@ -13,9 +13,11 @@ export class PatientsListService {
 
   private filterPatients(): Patient[] {
     return this._patients.filter(patient => {
-        return patient.amka.toString().toLocaleLowerCase().includes(this._filterTermString) || 
-          patient.firstName.toString().toLocaleLowerCase().includes(this._filterTermString) || 
-          patient.lastName.toString().toLocaleLowerCase().includes(this._filterTermString);
+        return (patient.amka && patient.amka.toString().toLocaleLowerCase().includes(this._filterTermString)) || 
+          (patient.firstName && patient.firstName.toString().toLocaleLowerCase().includes(this._filterTermString)) || 
+          (patient.lastName && patient.lastName.toString().toLocaleLowerCase().includes(this._filterTermString)) ||
+          (patient.telephone && patient.telephone.toString().toLocaleLowerCase().includes(this._filterTermString)) ||
+          (patient.mobile && patient.mobile.toString().toLocaleLowerCase().includes(this._filterTermString)) ;
       });
   }
 

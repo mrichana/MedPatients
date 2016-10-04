@@ -17,7 +17,6 @@ export class ListViewComponent implements OnInit, OnDestroy {
   constructor(private media: TdMediaService) { }
 
   private checkMedia(isLarge: boolean) {
-    console.log(this.navbar);
     if (isLarge) {
       this.sidenav.close();
       this.sidenav.mode = 'side';

@@ -1,12 +1,17 @@
-<div *ngIf="selected.patient">
+<div *ngIf="selected.patient" id="details-view-container">
   <md-card>
     <md-toolbar>
-      <span>{{ selected.patient.firstName }} {{ selected.patient.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span></span>
+      <span>{{ selected.firstName }} {{ selected.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span></span>
       <span class="fill-remaining-space"></span>
-      <a md-raised-button routerLink="/edit"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
     </md-toolbar>
-    <md-card-content *ngIf="selected.patient.amka">Α.Μ.Κ.Α. {{selected.patient.amka}}</md-card-content>
+    <md-card-content>
+      <div *ngIf="selected.amka"><button md-button> Α.Μ.Κ.Α. {{selected.patient.amka}}</button></div>
+      <div *ngIf="selected.telephone"><a md-button href="tel:{{selected.telephone}}"><i class="fa fa-phone"></i> {{selected.telephone}}</a></div>
+      <div *ngIf="selected.mobile"><a md-button href="tel:{{selected.mobile}}"><i class="fa fa-mobile-phone"></i> {{selected.mobile}}</a></div>
+
+    </md-card-content>
   </md-card>
   <md-card [innerHTML]="selected.notes">
   </md-card>
+  <a md-fab color="primary" routerLink="/edit" id="edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
 </div>

@@ -30,6 +30,7 @@ export class DatabaseService {
   private cleanUp<T>(item: T): T {
     for (let key in item) {
       if (key[0] == '$') { delete item[key]; }
+      else if (typeof item[key] === 'undefined') { item[key] = ''; }
     }
     return item;
   }

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 
 import { PatientsListService } from '../shared/services/patients-list.service';
-import { CreatePatientService } from '../shared/services/create-patient.service';
+import { SelectedPatientService } from '../shared/services/selected-patient.service';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -18,7 +18,7 @@ export class FilterPatientListComponent implements OnInit {
   private searchTerm: FormControl = new FormControl();
   private newPatientEnable: boolean = false;
 
-  constructor(private patientsList: PatientsListService, private createPatient: CreatePatientService, private router: Router) { }
+  constructor(private patientsList: PatientsListService, private selectedPatient: SelectedPatientService, private router: Router) { }
 
   ngOnInit() {
     this.patientsList.patients.subscribe(patients => {
@@ -31,7 +31,7 @@ export class FilterPatientListComponent implements OnInit {
   }
 
   private newPatient() {
-    this.createPatient.createPatient(this.searchTerm.value);
+    this.selectedPatient.create(this.searchTerm.value);
     this.searchTerm.setValue('');
     this.router.navigate(['/edit']);
   }
