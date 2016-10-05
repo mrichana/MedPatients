@@ -12,7 +12,7 @@
             <md-input-icon md-suffix [model]="firstName"></md-input-icon>
         </md-input>
 
-        <md-input type="text" placeholder="Επώνυμο" [(ngModel)]="selected.lastName" name="lastName" #lastName="ngModel" required>
+        <md-input type="text" placeholder="Επώνυμο" [(ngModel)]="selected.lastName" name="lastName" #lastName="ngModel" validateNotEmpty>
             <md-input-icon md-suffix [model]="lastName"></md-input-icon>
         </md-input>
 
@@ -24,12 +24,12 @@
             <md-input-icon md-suffix [model]="dob"></md-input-icon>
         </md-input>
 
-        <md-input type="tel" placeholder="Τηλέφωνο" [(ngModel)]="selected.telephone" name="telephone" #telephone="ngModel">
+        <md-input type="tel" placeholder="Τηλέφωνο" [(ngModel)]="selected.telephone" name="telephone" #telephone="ngModel" validateTelephone>
             <i md-prefix class="fa fa-phone"></i>
             <md-input-icon md-suffix [model]="telephone"></md-input-icon>
         </md-input>
 
-        <md-input type="tel" placeholder="Κινητό" [(ngModel)]="selected.mobile" name="mobile" #mobile="ngModel">
+        <md-input type="tel" placeholder="Κινητό" [(ngModel)]="selected.mobile" name="mobile" #mobile="ngModel" validateMobile>
             <i md-prefix class="fa fa-mobile-phone"></i>
             <md-input-icon md-suffix [model]="mobile"></md-input-icon>
         </md-input>
