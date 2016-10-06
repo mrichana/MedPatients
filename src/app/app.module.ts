@@ -26,6 +26,7 @@ import { SelectedPatientService } from './shared/services/selected-patient.servi
 import { PatientsListService } from './shared/services/patients-list.service';
 import { TdMediaService } from './shared/services/media.service'
 
+import { AmkaValidator } from './shared/validators/amka.validator';
 import { TelephoneValidator } from './shared/validators/telephone.validator';
 import { MobileValidator } from './shared/validators/mobile.validator';
 import { NotEmptyValidator } from './shared/validators/notEmpty.validator';
@@ -57,6 +58,7 @@ export const firebaseConfig = {
     PatientDetailsViewComponent,
     ListViewComponent, 
     MdInputIconComponent,
+    AmkaValidator,
     TelephoneValidator,
     MobileValidator,
     NotEmptyValidator

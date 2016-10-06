@@ -13,12 +13,15 @@ export class PatientsListService {
 
   private filterPatients(): Patient[] {
     return this._patients.filter(patient => {
-        return (patient.amka && patient.amka.toString().toLocaleLowerCase().includes(this._filterTermString)) || 
-          (patient.firstName && patient.firstName.toString().toLocaleLowerCase().includes(this._filterTermString)) || 
-          (patient.lastName && patient.lastName.toString().toLocaleLowerCase().includes(this._filterTermString)) ||
-          (patient.telephone && patient.telephone.toString().toLocaleLowerCase().includes(this._filterTermString)) ||
-          (patient.mobile && patient.mobile.toString().toLocaleLowerCase().includes(this._filterTermString)) ;
-      });
+      if (/^\+?\d*$/.test(this._filterTermString)) {
+        return (patient.amka && patient.amka.toString().includes(this._filterTermString)) ||
+          (patient.telephone && patient.telephone.toString().includes(this._filterTermString)) ||
+          (patient.mobile && patient.mobile.toString().includes(this._filterTermString));
+      } else {
+        return (patient.firstName && patient.firstName.toString().toLocaleLowerCase().includes(this._filterTermString)) ||
+          (patient.lastName && patient.lastName.toString().toLocaleLowerCase().includes(this._filterTermString))
+      }
+    });
   }
 
   constructor(private db: DatabaseService) {

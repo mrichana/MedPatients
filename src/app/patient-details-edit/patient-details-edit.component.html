@@ -1,40 +1,42 @@
-<md-toolbar>
-    <button md-icon-button type="button" (click)="selected.reniew();router.navigate(['/'])"><i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></button>    {{ selected.firstName }} {{ selected.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span>
-    <span class="fill-remaining-space"></span>
-    <button md-button type="button" (click)="delete()" class="delete-icon"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></button>
-    <button md-raised-button color="primary" type="button" [disabled]="!(form.valid&&(form.dirty || selected.isNew))" (click)="submit(form)">
+<div *ngIf="selected.patient">
+    <md-toolbar>
+        <button md-icon-button type="button" (click)="selected.reniew();router.navigate(['/'])"><i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></button>        {{ selected.firstName }} {{ selected.lastName}} <span *ngIf="selected.age > 0"> ({{selected.age}})</span>
+        <span class="fill-remaining-space"></span>
+        <button md-button type="button" (click)="delete()" class="delete-icon"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></button>
+        <button md-raised-button color="primary" type="button" [disabled]="!(form.valid&&(form.dirty || selected.isNew))" (click)="submit(form)">
         <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
     </button>
-</md-toolbar>
-<md-card>
-    <form #form="ngForm">
-        <md-input type="text" placeholder="Όνομα" [(ngModel)]="selected.firstName" name="firstName" #firstName="ngModel">
-            <md-input-icon md-suffix [model]="firstName"></md-input-icon>
-        </md-input>
+    </md-toolbar>
+    <md-card>
+        <form #form="ngForm">
+            <md-input type="text" placeholder="Όνομα" [(ngModel)]="selected.firstName" name="firstName" #firstName="ngModel">
+                <md-input-icon md-suffix [model]="firstName"></md-input-icon>
+            </md-input>
 
-        <md-input type="text" placeholder="Επώνυμο" [(ngModel)]="selected.lastName" name="lastName" #lastName="ngModel" validateNotEmpty>
-            <md-input-icon md-suffix [model]="lastName"></md-input-icon>
-        </md-input>
+            <md-input type="text" placeholder="Επώνυμο" [(ngModel)]="selected.lastName" name="lastName" #lastName="ngModel" validateNotEmpty>
+                <md-input-icon md-suffix [model]="lastName"></md-input-icon>
+            </md-input>
 
-        <md-input type="tel" placeholder="ΑΜΚΑ" [(ngModel)]="selected.amka" name="amka" #amka="ngModel">
-            <md-input-icon md-suffix [model]="amka"></md-input-icon>
-        </md-input>
+            <md-input type="tel" placeholder="ΑΜΚΑ" [(ngModel)]="selected.amka" name="amka" #amka="ngModel" validateAmka>
+                <md-input-icon md-suffix [model]="amka"></md-input-icon>
+            </md-input>
 
-        <md-input type="date" placeholder="Ημ.Γέννησης" [(ngModel)]="selected.dob" name="dob" #dob="ngModel">
-            <md-input-icon md-suffix [model]="dob"></md-input-icon>
-        </md-input>
+            <md-input type="date" placeholder="Ημ.Γέννησης" [(ngModel)]="selected.dob" name="dob" #dob="ngModel">
+                <md-input-icon md-suffix [model]="dob"></md-input-icon>
+            </md-input>
 
-        <md-input type="tel" placeholder="Τηλέφωνο" [(ngModel)]="selected.telephone" name="telephone" #telephone="ngModel" validateTelephone>
-            <i md-prefix class="fa fa-phone"></i>
-            <md-input-icon md-suffix [model]="telephone"></md-input-icon>
-        </md-input>
+            <md-input type="tel" placeholder="Τηλέφωνο" [(ngModel)]="selected.telephone" name="telephone" #telephone="ngModel" validateTelephone>
+                <i md-prefix class="fa fa-phone"></i>
+                <md-input-icon md-suffix [model]="telephone"></md-input-icon>
+            </md-input>
 
-        <md-input type="tel" placeholder="Κινητό" [(ngModel)]="selected.mobile" name="mobile" #mobile="ngModel" validateMobile>
-            <i md-prefix class="fa fa-mobile-phone"></i>
-            <md-input-icon md-suffix [model]="mobile"></md-input-icon>
-        </md-input>
+            <md-input type="tel" placeholder="Κινητό" [(ngModel)]="selected.mobile" name="mobile" #mobile="ngModel" validateMobile>
+                <i md-prefix class="fa fa-mobile-phone"></i>
+                <md-input-icon md-suffix [model]="mobile"></md-input-icon>
+            </md-input>
 
-        <ckeditor [config]="{entities_greek: false,toolbarCanCollapse: true, toolbarStartupExpanded: false, scayt_autoStartup: true, autoGrow_onStartup: true}"
-            [(ngModel)]="selected.notes" name="notes"></ckeditor>
-    </form>
-</md-card>
+            <ckeditor [config]="{entities_greek: false,toolbarCanCollapse: true, toolbarStartupExpanded: false, scayt_autoStartup: true, autoGrow_onStartup: true}"
+                [(ngModel)]="selected.notes" name="notes"></ckeditor>
+        </form>
+    </md-card>
+</div>
