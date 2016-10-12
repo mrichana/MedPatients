@@ -1,0 +1,17 @@
+<md-toolbar>
+	<button md-icon-button type="button" (click)="logout()">
+		<i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
+	</button> Αρχείο Ασθενών
+</md-toolbar>
+<md-card>
+	<md-card-title>Επιβεβαίωση eMail</md-card-title>
+	<md-card-content>
+		<p>Παρακαλώ ελέγξτε το eMail σας για το μήνυμα επιβεβαίωσης eMail.</p>
+		<p>Εάν δεν λάβετε τέτοιο μήνυμα, επαληθεύστε ότι το eMail που δώσατε είναι σωστά γραμμένο και ότι το μήνυμα της υπηρεσίας
+			δεν βρίσκεται στον φάκελο με την ανεπιθύμητη αλληλογραφία (spam).</p>
+	</md-card-content>
+	<md-card-actions>
+		<button md-raised-button type="button" (click)="logout()">Επιστροφή</button>
+		<button md-button type="button" (click)="resendEmail()">Αποστολή νέου eMail</button>
+	</md-card-actions>
+</md-card>

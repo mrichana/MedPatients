@@ -1,17 +1,9 @@
 <md-toolbar>
-  <button *ngIf="showSidebarButton" md-icon-button type="button" (click)="openSideBar()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></button>
-  {{title}}
-  <span class="fill-remaining-space"></span>
-    
-    <form>
-      <span *ngIf="!auth.authenticated">
-        <a md-button (click)="login()">Σύνδεση...</a>
-      </span>
-      <span *ngIf="auth.authenticated" >
-        <a md-button href="#" (click)="logout()">
-          {{auth?.displayName}}
-          <img src="{{auth?.photoURL}}" class="img-circle photo">
-        </a>
-      </span>
-    </form>
+	<button *ngIf="showSidebarButton" md-icon-button type="button" (click)="openSideBar()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></button>	Αρχείο Ασθενών
+	<span class="fill-remaining-space"></span>
+
+	<button md-button type="button" (click)="logout()">
+    <i class="fa fa-sign-out" aria-hidden="true"></i> {{auth.displayName?auth.displayName:auth.email}}
+    <img *ngIf="auth.photoURL" src="{{auth.photoURL}}" class="photo">
+  </button>
 </md-toolbar>

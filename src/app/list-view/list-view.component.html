@@ -1,8 +1,8 @@
 <md-sidenav-layout class="full-height">
-  <navbar title="Αρχείο Ασθενών" (openSidebar)="openSidebar()" #navbar></navbar>
-  <md-sidenav #start>
-    <filter-patient-list></filter-patient-list>
-    <patient-list (PatientSelected)="closeSidebar()"></patient-list>
-  </md-sidenav>
-  <patient-details-view></patient-details-view>
+	<navbar (openSidebar)="openSidebar()" #navbar></navbar>
+	<md-sidenav #start>
+		<filter-patient-list></filter-patient-list>
+		<patient-list (PatientSelected)="closeSidebar()"></patient-list>
+	</md-sidenav>
+	<patient-details-view></patient-details-view>
 </md-sidenav-layout>

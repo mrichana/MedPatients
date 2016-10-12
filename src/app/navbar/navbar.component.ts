@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
-import {AuthenticationService} from '../shared/services/authentication.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'navbar',
@@ -9,23 +9,27 @@ import {AuthenticationService} from '../shared/services/authentication.service';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() title: string;
   @Input() showSidebarButton: boolean;
 
   @Output() openSidebar: EventEmitter<any> = new EventEmitter();
 
-  constructor( private auth: AuthenticationService ) {}
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    this.title = this.title || 'Default Title'; 
-  }
+    // this.auth.auth.subscribe(auth => {
+    //   if (!auth) {
+    //     this.router.navigate(['/login']);
+    //   }
+    //   else if (!(auth && auth.auth.emailVerified)) {
+    //     this.router.navigate(['/register/validate']);
+    //   }
+    // });
 
-  login() {
-    this.auth.login();
   }
 
   logout() {
     this.auth.logout();
+    this.router.navigate(['/login']);
   }
 
   openSideBar() {

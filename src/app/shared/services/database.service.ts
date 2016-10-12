@@ -5,7 +5,6 @@ import { Patient } from '../patient/patient';
 import { Notes } from '../patient/notes';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
@@ -48,7 +47,7 @@ export class DatabaseService {
     }
   }
 
-  public setPatient(id: string, patient: Patient=null) {
+  public setPatient(id: string, patient: Patient = null) {
     if (this._auth.authenticated) {
       this.cleanUp(patient);
       let firebaseObject: FirebaseObjectObservable<Patient> = this._af.database.object(this._auth.uid + '/patients/' + id);
@@ -68,7 +67,7 @@ export class DatabaseService {
     }
   }
 
-  public setPatientNotes(id: string, notes: Notes=null) {
+  public setPatientNotes(id: string, notes: Notes = null) {
     if (this._auth.authenticated) {
       this.cleanUp(notes);
       let firebaseObject: FirebaseObjectObservable<Patient> = this._af.database.object(this._auth.uid + '/patient-notes/' + id);

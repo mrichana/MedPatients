@@ -1,0 +1,22 @@
+<md-toolbar>
+	<button md-icon-button routerLink="/login">
+		<i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
+	</button> Αρχείο Ασθενών
+</md-toolbar>
+<md-card>
+	<form #form="ngForm" (ngSubmit)="registerWithPassword()">
+		<md-input type="email" [(ngModel)]="username" placeholder="eMail Χρήστη" name="username" #usernameModel="ngModel" required
+			validateEmail>
+			<md-input-icon md-suffix [model]="usernameModel"></md-input-icon>
+		</md-input>
+		<md-input type="password" [(ngModel)]="password" placeholder="Κωδικός" name="password" #passwordModel="ngModel" required
+			validatePassword validateEqual="passwordVerification" reverse="true" [hintLabel]="passwordModel.valid?'':'Τουλάχιστον 6 χαρακτήρες'">
+			<md-input-icon md-suffix [model]="passwordModel"></md-input-icon>
+		</md-input>
+		<md-input type="password" [(ngModel)]="passwordVerification" placeholder="Επαλήθευση Κωδικού" name="passwordVerification"
+			#passwordVerificationModel="ngModel" required validateEqual="password" [hintLabel]="passwordVerificationModel.valid?'':'Δεν είναι ίδιο με τον κωδικό'">
+			<md-input-icon md-suffix [model]="passwordVerificationModel"></md-input-icon>
+		</md-input>
+		<button md-raised-button color="primary" type="submit" [disabled]="!(form.valid)"><i class="fa fa-sign-in" aria-hidden="true"></i> Δημιουργία</button>
+	</form>
+</md-card>

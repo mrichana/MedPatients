@@ -12,9 +12,9 @@ import { SelectedPatientService } from '../shared/services/selected-patient.serv
 export class PatientDetailsEditComponent implements OnInit {
 
   constructor(private selected: SelectedPatientService, private router: Router) {
-    if (!this.selected.patient) {
-      this.router.navigate(['/']);
-    }
+    // if (!this.selected.patient) {
+    //   this.router.navigate(['/']);
+    // }
   }
 
   ngOnInit() {

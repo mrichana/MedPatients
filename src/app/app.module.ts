@@ -13,8 +13,12 @@ import { MdInputModule } from '@angular2-material/input';
 import { MdListModule } from '@angular2-material/list';
 import { MdCardModule } from '@angular2-material/card';
 
-import { routing,
-         appRoutingProviders }  from './app.routing';
+import {
+  routing,
+  appRoutingProviders
+} from './app.routing';
+
+import { AuthGuard } from './shared/services/guards/auth-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -29,6 +33,9 @@ import { TdMediaService } from './shared/services/media.service'
 import { AmkaValidator } from './shared/validators/amka.validator';
 import { TelephoneValidator } from './shared/validators/telephone.validator';
 import { MobileValidator } from './shared/validators/mobile.validator';
+import { EmailValidator } from './shared/validators/email.validator';
+import { PasswordValidator } from './shared/validators/password.validator';
+import { EqualValidator } from './shared/validators/equal.validator';
 import { NotEmptyValidator } from './shared/validators/notEmpty.validator';
 
 import { PatientListComponent } from './patient-list/patient-list.component';
@@ -37,14 +44,18 @@ import { FilterPatientListComponent } from './filter-patient-list/filter-patient
 import { PatientDetailsViewComponent } from './patient-details-view/patient-details-view.component';
 import { ListViewComponent } from './list-view/list-view.component';
 import { MdInputIconComponent } from './md-input-icon/md-input-icon.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginResetComponent } from './login/loginReset/loginReset.component';
+import { EmailValidateComponent } from './register/emailValidate/emailValidate.component';
 
 // Must export the config
 export const firebaseConfig = {
-    apiKey: "AIzaSyDeOFifu78JOA1wmXxNIWT5BCKMIR6jBC4",
-    authDomain: "medpatients-ecc63.firebaseapp.com",
-    databaseURL: "https://medpatients-ecc63.firebaseio.com",
-    storageBucket: "medpatients-ecc63.appspot.com",
-    messagingSenderId: "302656355110"
+  apiKey: "AIzaSyDeOFifu78JOA1wmXxNIWT5BCKMIR6jBC4",
+  authDomain: "medpatients-ecc63.firebaseapp.com",
+  databaseURL: "https://medpatients-ecc63.firebaseio.com",
+  storageBucket: "medpatients-ecc63.appspot.com",
+  messagingSenderId: "302656355110"
 };
 
 
@@ -56,12 +67,19 @@ export const firebaseConfig = {
     PatientDetailsEditComponent,
     FilterPatientListComponent,
     PatientDetailsViewComponent,
-    ListViewComponent, 
+    ListViewComponent,
     MdInputIconComponent,
     AmkaValidator,
     TelephoneValidator,
     MobileValidator,
-    NotEmptyValidator
+    EmailValidator,
+    PasswordValidator,
+    EqualValidator,
+    NotEmptyValidator,
+    LoginComponent,
+    RegisterComponent,
+    LoginResetComponent,
+    EmailValidateComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +103,8 @@ export const firebaseConfig = {
     PatientsListService,
     UUIDService,
     TdMediaService,
-    appRoutingProviders
+    appRoutingProviders,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
