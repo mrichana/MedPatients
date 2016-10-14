@@ -5,12 +5,14 @@ import { DatabaseService } from './database.service';
 import { UUIDService } from './uuid.service';
 import { Patient } from '../patient/patient';
 import { Notes } from '../patient/notes';
+import { Address } from './../patient/address';
 
 @Injectable()
 export class SelectedPatientService {
   private _id: string;
   private _patient: Patient;
   private _patientNotes: string;
+  private _patientAddress: Address;
 
   constructor(private db: DatabaseService, private uuid: UUIDService) { }
 
@@ -101,6 +103,10 @@ export class SelectedPatientService {
     this._patientNotes = value;
   }
 
+  public get address(): Address {
+    return this._patientAddress;
+  }
+
   public get age(): number {
     let now: moment.Moment = moment();
     let ret = now.diff(moment(this._patient.dob), 'years');
@@ -119,6 +125,9 @@ export class SelectedPatientService {
     this.db.getPatientNotes(id).subscribe(notes => {
       this._patientNotes = notes.notes;
     });
+    this.db.getPatientAddress(id).subscribe(address => {
+      this._patientAddress = address;
+    });
   }
 
   private newId() {
@@ -135,34 +144,39 @@ export class SelectedPatientService {
     }
     this.db.setPatient(this.id, this._patient);
     this.db.setPatientNotes(this.id, new Notes(this._patientNotes));
+    this.db.setPatientAddress(this.id, this._patientAddress);
   }
 
   public create(patient: Patient | string = null) {
     this._id = null;
-    if (typeof(patient) === 'string') {
+    if (typeof (patient) === 'string') {
       patient = this.patientFromString(patient);
     }
-    
+
     this._patient = patient || new Patient(null, null, null, null, null, null);
     if (!this.dob) {
       this.dob = this.dobFromAmka(this.amka);
     }
     this._patientNotes = null;
+    this._patientAddress = new Address(null, null, null, null);
   }
 
   public delete() {
     this.db.setPatient(this.id);
     this.db.setPatientNotes(this.id);
+    this.db.setPatientAddress(this.id);
 
     this._id = null;
     this._patient = null;
     this._patientNotes = null;
+    this._patientAddress = null;
   }
 
   public reniew() {
     if (this.isNew) {
       this._patient = null;
       this._patientNotes = null;
+      this._patientAddress = null;
     } else {
       this.select(this.id);
     }

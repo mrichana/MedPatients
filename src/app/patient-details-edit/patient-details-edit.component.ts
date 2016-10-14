@@ -1,7 +1,7 @@
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectedPatientService } from '../shared/services/selected-patient.service';
 
 @Component({
@@ -10,11 +10,9 @@ import { SelectedPatientService } from '../shared/services/selected-patient.serv
   styleUrls: ['./patient-details-edit.component.css']
 })
 export class PatientDetailsEditComponent implements OnInit {
+  @ViewChild('form') form: NgForm;
 
   constructor(private selected: SelectedPatientService, private router: Router) {
-    // if (!this.selected.patient) {
-    //   this.router.navigate(['/']);
-    // }
   }
 
   ngOnInit() {
@@ -26,7 +24,13 @@ export class PatientDetailsEditComponent implements OnInit {
   }
 
   delete() {
-    this.selected.delete();
-    this.router.navigate(['/']);
+    if (window.confirm('Διαγραφή του ασθενούς?')) {
+      this.selected.delete();
+      this.router.navigate(['/']);
+    };
+  }
+
+  addAddress() {
+    console.log('addAddress');
   }
 }

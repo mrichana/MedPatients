@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { ListViewComponent } from './list-view.component';
+import { AddressEditComponent } from './address-edit.component';
 
-describe('Component: ListView', () => {
+describe('Component: AddressEdit', () => {
   it('should create an instance', () => {
-    let component = new ListViewComponent();
+    let component = new AddressEditComponent();
     expect(component).toBeTruthy();
   });
 });

@@ -11,11 +11,23 @@ md-toolbar {
   z-index: 100;
 }
 
-md-card {
+#content {
   position: fixed;
   top:64px;
   bottom: 0;
   left: 0;
   right: 0;
   overflow-y: auto;
+  margin-bottom: 0px;
+}
+
+#addButton {
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
+  z-index: 100;
+}
+
+md-card {
+  margin-bottom: 8px;
 }

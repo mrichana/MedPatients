@@ -2,11 +2,12 @@
   flex: 1 1 auto;
 }
 
-#edit {
+#editButton {
   position: fixed;
-  bottom: 10%;
-  right: 10%;
+  bottom: 5rem;
+  right: 5rem;
   z-index: 999999;
+  background-color: #a94442;
 }
 
 #details-view-container {

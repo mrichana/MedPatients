@@ -13,7 +13,7 @@ export class PatientsListService {
 
   private filterPatients(): Patient[] {
     return this._patients.filter(patient => {
-      if (/^\+?\d*$/.test(this._filterTermString)) {
+      if (/^\+?\d+$/.test(this._filterTermString)) {
         return (patient.amka && patient.amka.toString().includes(this._filterTermString)) ||
           (patient.telephone && patient.telephone.toString().includes(this._filterTermString)) ||
           (patient.mobile && patient.mobile.toString().includes(this._filterTermString));

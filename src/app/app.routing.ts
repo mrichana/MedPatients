@@ -8,9 +8,10 @@ import { RegisterComponent } from './register/register.component'
 import { EmailValidateComponent } from './register/emailValidate/emailValidate.component'
 
 import { AuthGuard } from './shared/services/guards/auth-guard.service';
+import { EditGuard } from './shared/services/guards/edit-guard.service';
 
 const appRoutes: Routes = [
-    { path: 'edit', component: PatientDetailsEditComponent, canActivate: [AuthGuard] },
+    { path: 'edit', component: PatientDetailsEditComponent, canActivate: [EditGuard], canDeactivate: [EditGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'login/reset', component: LoginResetComponent },
     { path: 'register', component: RegisterComponent },

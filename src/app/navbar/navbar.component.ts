@@ -16,15 +16,6 @@ export class NavbarComponent implements OnInit {
   constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    // this.auth.auth.subscribe(auth => {
-    //   if (!auth) {
-    //     this.router.navigate(['/login']);
-    //   }
-    //   else if (!(auth && auth.auth.emailVerified)) {
-    //     this.router.navigate(['/register/validate']);
-    //   }
-    // });
-
   }
 
   logout() {

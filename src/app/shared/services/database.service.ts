@@ -3,6 +3,7 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { AuthenticationService } from './authentication.service';
 import { Patient } from '../patient/patient';
 import { Notes } from '../patient/notes';
+import { Address } from '../patient/address';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -29,7 +30,7 @@ export class DatabaseService {
   private cleanUp<T>(item: T): T {
     for (let key in item) {
       if (key[0] == '$') { delete item[key]; }
-      else if (typeof item[key] === 'undefined') { item[key] = ''; }
+      else if (typeof item[key] === 'undefined' || item[key] === null) { item[key] = ''; }
     }
     return item;
   }
@@ -43,7 +44,7 @@ export class DatabaseService {
       return this._af.database.object(this._auth.uid + '/patients/' + id);
     }
     else {
-      return null;
+      throw 'Error: Not Authenticated';
     }
   }
 
@@ -54,16 +55,16 @@ export class DatabaseService {
       firebaseObject.set(patient);
     }
     else {
-      throw 'Error';
+      throw 'Error: Not Authenticated';
     }
   }
 
-  public getPatientNotes(amka: String): Observable<Notes> {
+  public getPatientNotes(id: String): Observable<Notes> {
     if (this._auth.authenticated) {
-      return this._af.database.object(this._auth.uid + '/patient-notes/' + amka);
+      return this._af.database.object(this._auth.uid + '/patient-notes/' + id);
     }
     else {
-      return null;
+      throw 'Error: Not Authenticated';
     }
   }
 
@@ -74,7 +75,27 @@ export class DatabaseService {
       firebaseObject.set(notes);
     }
     else {
-      throw 'Error';
+      throw 'Error: Not Authenticated';
+    }
+  }
+
+  public getPatientAddress(id: String): Observable<Address> {
+    if (this._auth.authenticated) {
+      return this._af.database.object(this._auth.uid + '/patient-address/' + id);
+    }
+    else {
+      throw 'Error: Not Authenticated';
+    }
+  }
+
+  public setPatientAddress(id: string, address: Address = null) {
+    if (this._auth.authenticated) {
+      this.cleanUp(address);
+      let firebaseObject: FirebaseObjectObservable<Patient> = this._af.database.object(this._auth.uid + '/patient-address/' + id);
+      firebaseObject.set(address);
+    }
+    else {
+      throw 'Error: Not Authenticated';
     }
   }
 }

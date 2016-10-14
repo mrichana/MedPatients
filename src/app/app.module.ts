@@ -6,12 +6,16 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { CKEditorModule } from 'ng2-ckeditor';
 
+import { OVERLAY_PROVIDERS } from "@angular2-material/core";
 import { MdSidenavModule } from '@angular2-material/sidenav';
 import { MdToolbarModule } from '@angular2-material/toolbar';
 import { MdButtonModule } from '@angular2-material/button';
 import { MdInputModule } from '@angular2-material/input';
 import { MdListModule } from '@angular2-material/list';
 import { MdCardModule } from '@angular2-material/card';
+import { MdMenuModule } from '@angular2-material/menu';
+import { MdTabsModule } from '@angular2-material/tabs';
+import { MdProgressBarModule } from '@angular2-material/progress-bar';
 
 import {
   routing,
@@ -19,6 +23,7 @@ import {
 } from './app.routing';
 
 import { AuthGuard } from './shared/services/guards/auth-guard.service';
+import { EditGuard } from './shared/services/guards/edit-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -48,6 +53,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginResetComponent } from './login/loginReset/loginReset.component';
 import { EmailValidateComponent } from './register/emailValidate/emailValidate.component';
+import { AddressEditComponent } from './patient-details-edit/address-edit/address-edit.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -79,7 +85,8 @@ export const firebaseConfig = {
     LoginComponent,
     RegisterComponent,
     LoginResetComponent,
-    EmailValidateComponent
+    EmailValidateComponent,
+    AddressEditComponent
   ],
   imports: [
     BrowserModule,
@@ -94,9 +101,13 @@ export const firebaseConfig = {
     MdInputModule,
     MdListModule,
     MdCardModule,
+    MdMenuModule,
+    MdTabsModule,
+    MdProgressBarModule,
     routing
   ],
   providers: [
+    OVERLAY_PROVIDERS,
     AuthenticationService,
     DatabaseService,
     SelectedPatientService,
@@ -104,7 +115,8 @@ export const firebaseConfig = {
     UUIDService,
     TdMediaService,
     appRoutingProviders,
-    AuthGuard
+    AuthGuard,
+    EditGuard
   ],
   bootstrap: [AppComponent]
 })
